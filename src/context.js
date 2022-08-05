@@ -51,7 +51,31 @@ const AppProvider = ({children}) => {
   
   const handleSearch = (searchQuery) => {
     dispatch({type: HANDLE_SEARCH, payload: searchQuery})
+  }; 
+  
+  const handlePage = (value) => {
+    console.log(value); 
+    if (value === 'inc') {
+      if (page < nbPages - 1) {
+        dispatch({type: HANDLE_PAGE, payload: page + 1})
+        return 
+      } else {
+        dispatch({type: HANDLE_PAGE, payload: 0})
+        return 
+      }
+    } 
+    
+    if (value === 'dec') {
+      if (page > 0) {
+        dispatch({type: HANDLE_PAGE, payload: page - 1})
+        return; 
+      } else {
+        dispatch({type: HANDLE_PAGE, payload: nbPages - 1});
+        return; 
+      }
+    }
   }
+  
   
   useEffect(() => {
     fetchStories(`${API_ENDPOINT}query=${query}&page=${page}`)
@@ -62,6 +86,7 @@ const AppProvider = ({children}) => {
     ...state,
     removeStory,
     handleSearch,
+    handlePage, 
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

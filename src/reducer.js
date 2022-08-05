@@ -37,6 +37,12 @@ const reducer = (state, action) => {
         page: 0
       }
     
+    case HANDLE_PAGE: 
+      return {
+        ...state, 
+        page: payload
+      }
+    
     default:
       throw new Error(`No matching action type for ${type}`);
   }
