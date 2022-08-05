@@ -6,7 +6,41 @@ import {
   HANDLE_SEARCH,
 } from './actions';
 
-const reducer = () => {};
+const reducer = (state, action) => {
+  const {type, payload} = action; 
+  
+  switch (type) {
+    case SET_LOADING: 
+      return {
+        ...state,
+        isLoading: true 
+      }
+    
+    case SET_STORIES: 
+      return {
+        ...state, 
+        hits: payload.hits, 
+        nbPages: payload.nbPages, 
+        isLoading: false
+      }
+    
+    case REMOVE_STORY: 
+      return {
+        ...state, 
+        hits: payload
+      }
+    
+    case HANDLE_SEARCH: 
+      return {
+        ...state, 
+        query: payload, 
+        page: 0
+      }
+    
+    default:
+      throw new Error(`No matching action type for ${type}`);
+  }
+};
 
 
 export default reducer;

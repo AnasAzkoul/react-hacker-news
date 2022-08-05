@@ -5,7 +5,13 @@ import Buttons from './Buttons';
 
 
 function App() {
-  return <h2>hacker news starter</h2>;
+  return (
+    <>
+      <SearchForm />
+      <Buttons />
+      <Stories />
+    </>
+  );
 }
 
 export default App;
